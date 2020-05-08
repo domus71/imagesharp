@@ -38,7 +38,7 @@ These instructions will get you a copy of the project up and running on your loc
 First clone the project to your development enviroment.
 
 ```
-git clone https://github.com/domus71/imagesharp
+git clone https://github.com/domus71/imagesharp.git
 ```
 
 You have to install [Sharp](https://www.npmjs.com/package/sharp) ang [Express](https://www.npmjs.com/package/express) framework usign npm.
