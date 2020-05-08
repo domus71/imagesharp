@@ -54,7 +54,13 @@ The default port is 3001. You can change port from config.json
 node index.js
 ```
 
-On your browser:
+On your browser to get information (metadata) as json object:
+
+```
+http://localhost:3001/getinfo?source=<fullpath of source image file>
+```
+
+On your browser to generate new image:
 
 ```
 http://localhost:3001/generate?source=<fullpath of source image file>&dest=<fullpath of generated image file>&width=<pixels>&height=<pixels>&quality=<from 1 to 100>&lossless=<0/1/true/on>&progressive=<0/1/true/on>
