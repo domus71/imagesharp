@@ -1,22 +1,17 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
-</p>
-
 <h3 align="center">imagesharp</h3>
 
-<div align="center">
+<div>
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/domus71/imagesharp/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/domus71/imagesharp/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
 
 ---
 
-<p align="center"> Few lines describing your project.
+<p align="center"> A simple web interface to generate image.
     <br> 
 </p>
 
@@ -34,81 +29,50 @@
 
 ## 🧐 About <a name = "about"></a>
 
-A simple web interface to generate image using [Sharp](https://sharp.pixelplumbing.com/) for Node.js
+A simple web interface to generate image using [Sharp](https://www.npmjs.com/package/sharp) for Node.js.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
-
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
+First clone the project to your development enviroment.
 
 ```
-Give the example
+git clone https://github.com/domus71/imagesharp
 ```
 
-And repeat
+You have to install [Sharp](https://www.npmjs.com/package/sharp) ang [Express](https://www.npmjs.com/package/express) framework usign npm.
 
 ```
-until finished
+npm install
+node index.js
 ```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## 🎈 Usage <a name="usage"></a>
 
-Add notes about how to use the system.
+The default port is 3001. You can change port from config.json
+
+```
+http://localhost:3001/generate?source=<fullpath of source image file>&dest=<fullpath of generated image file>&width=<pixels>&height=<pixels>&quality=<from 1 to 100>&lossless=<0/1/true/on>&progressive=<0/1/true/on>
+```
+
+The source and the destanation image paths must be url encoded. If width and height are 0, then image keeps the original size. The properties quality, lossless and progressive are optional. Default quality is 80%. Also, I have disabled the Sharp cache to get new file everytime. You can comment the line 9 to speed up things and change [Sharp caching options](https://sharp.pixelplumbing.com/api-utility#cache)
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
-Add additional notes about how to deploy this on a live system.
+You can change the port and/or convert it to Windows service using [NSSM](https://nssm.cc/). I use it as an internal service to convert big PNG files to WebP format.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
-- [MongoDB](https://www.mongodb.com/) - Database
 - [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
+- [Sharp](https://www.npmjs.com/package/sharp) - High performance Node.js image processing
 - [NodeJs](https://nodejs.org/en/) - Server Environment
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
-
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
+- [@domus71](https://github.com/domus71)
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+- Hate old Windows DLLs
