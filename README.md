@@ -1,10 +1,10 @@
-<h3 align="center">imagesharp</h3>
+<h3>ImageSharp</h3>
 
 <div>
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/domus71/imagesharp/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/domus71/imagesharp/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/domus71/imagesharp.svg)](https://github.com/domus71/imagesharp/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/domus71/imagesharp.svg)](https://github.com/domus71/imagesharp/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
