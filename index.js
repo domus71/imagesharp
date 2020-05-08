@@ -48,6 +48,17 @@ app.get('/generate', async (req,res) => {
     }
 });
 
+app.get('/getinfo',async (req,res) => {
+    try{
+        let source = req.query.source;
+        const image = sharp(source);
+        const metadata = await image.metadata();
+        res.send(metadata);
+    }catch(e){
+        res.send(e);
+    }
+});
+
 app.listen(port, console.log.bind(console, 'Listening on port ' + port));
 
 function strToBool(s) {
