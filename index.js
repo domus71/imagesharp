@@ -3,6 +3,19 @@ const sharp = require("sharp");
 const config = require("./config.json");
 const port = config.port;
 
+//Order based on GflAX object for compatiblity reasons
+const rposition = [
+  "left top",
+  "top",
+  "right top",
+  "left",
+  "center",
+  "right",
+  "left bottom",
+  "bottom",
+  "right bottom",
+];
+
 const app = express();
 
 //Disable file/memory caching
@@ -25,6 +38,7 @@ app.get("/generate", async (req, res) => {
     let progressive = strToBool(req.query.progressive) ? true : false;
     let wimage = req.query.wimage || "";
     let wposition = req.query.wposition || "southeast";
+    let imgPosition = req.query.pos != "" ? parseInt(req.query.pos) : 4;
 
     const image = sharp(source);
 
@@ -32,7 +46,13 @@ app.get("/generate", async (req, res) => {
     if (sourceFileExt != "jpg" && sourceFileExt != "jpeg" && fileExt == "jpg")
       await image.flatten({ background: "#ffffff" });
 
-    if (width != null || height != null) await image.resize(width, height);
+    if (width != null || height != null)
+      await image.resize({
+        width,
+        height,
+        fit: "cover",
+        position: rposition[imgPosition],
+      });
     if (wimage != "") {
       await image.composite([{ input: wimage, gravity: wposition }]);
     }
