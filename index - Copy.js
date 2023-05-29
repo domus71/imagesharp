@@ -2,11 +2,21 @@ const express = require("express");
 const sharp = require("sharp");
 const config = require("./config.json");
 const port = config.port;
-const rposition = ['left top', 'top', 'right top', 'left', 'center', 'right', 'left bottom', 'bottom', 'right bottom']; //Order based on GflAX object for compatiblity reasons
-const fit = ['cover', 'contain', 'fill', 'inside', 'outside'];
+
+//Order based on GflAX object for compatiblity reasons
+const rposition = [
+  "left top",
+  "top",
+  "right top",
+  "left",
+  "center",
+  "right",
+  "left bottom",
+  "bottom",
+  "right bottom",
+];
 
 const app = express();
-app.disable("x-powered-by");
 
 //Disable file/memory caching
 sharp.cache(false);
@@ -28,7 +38,7 @@ app.get("/generate", async (req, res) => {
     let progressive = strToBool(req.query.progressive) ? true : false;
     let wimage = req.query.wimage || "";
     let wposition = req.query.wposition || "southeast";
-	let imgFit = (req.query.fit!='')?parseInt(req.query.fit) : 0;
+    let imgPosition = req.query.pos != "" ? parseInt(req.query.pos) : 4;
 
     const image = sharp(source);
 
@@ -36,7 +46,13 @@ app.get("/generate", async (req, res) => {
     if (sourceFileExt != "jpg" && sourceFileExt != "jpeg" && fileExt == "jpg")
       await image.flatten({ background: "#ffffff" });
 
-    if (width != null || height != null) await image.resize({width, height, fit:fit[imgFit], background:{r:255,g:255,b:255,alpha:0} });
+    if (width != null || height != null)
+      await image.resize({
+        width,
+        height,
+        fit: "cover",
+        position: rposition[imgPosition],
+      });
     if (wimage != "") {
       await image.composite([{ input: wimage, gravity: wposition }]);
     }
@@ -54,7 +70,7 @@ app.get("/generate", async (req, res) => {
 
     await image.toFile(dest);
     res.send(dest);
-    // console.log(source + " -> " + dest);
+    // console.log(source +' -> '+ dest);
   } catch (e) {
     res.send(e.message);
     // console.error(e);
@@ -67,17 +83,6 @@ app.get("/getinfo", async (req, res) => {
     const image = sharp(source);
     const metadata = await image.metadata();
     res.send(metadata);
-  } catch (e) {
-    res.send(e);
-  }
-});
-
-app.get("/getsize", async (req, res) => {
-  try {
-    let source = req.query.source;
-    const image = sharp(source);
-    const metadata = await image.metadata();
-    res.send(`${metadata.width}x${metadata.height}`);
   } catch (e) {
     res.send(e);
   }
