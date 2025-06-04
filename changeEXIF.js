@@ -1,8 +1,7 @@
 const sharp = require("sharp");
 const exif = require("exif-reader");
 const source = "C:\\CostisWork\\NodeJS\\imagesharp\\demo\\generic.jpg";
-const destanation =
-  "C:\\CostisWork\\NodeJS\\imagesharp\\demo\\generic_exif.jpg";
+const destanation = "C:\\CostisWork\\NodeJS\\imagesharp\\demo\\generic_exif.jpg";
 
 (async () => {
   const image = await sharp(source)

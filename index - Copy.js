@@ -4,17 +4,7 @@ const config = require("./config.json");
 const port = config.port;
 
 //Order based on GflAX object for compatiblity reasons
-const rposition = [
-  "left top",
-  "top",
-  "right top",
-  "left",
-  "center",
-  "right",
-  "left bottom",
-  "bottom",
-  "right bottom",
-];
+const rposition = ["left top", "top", "right top", "left", "center", "right", "left bottom", "bottom", "right bottom"];
 
 const app = express();
 
@@ -43,8 +33,7 @@ app.get("/generate", async (req, res) => {
     const image = sharp(source);
 
     await image.withMetadata().rotate();
-    if (sourceFileExt != "jpg" && sourceFileExt != "jpeg" && fileExt == "jpg")
-      await image.flatten({ background: "#ffffff" });
+    if (sourceFileExt != "jpg" && sourceFileExt != "jpeg" && fileExt == "jpg") await image.flatten({ background: "#ffffff" });
 
     if (width != null || height != null)
       await image.resize({
